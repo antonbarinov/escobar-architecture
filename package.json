@@ -1,7 +1,7 @@
 {
-  "name": "jobs",
+  "name": "escobar-example",
   "version": "1.0.0",
-  "description": "Node.js REST API simple, light and fast micro framework",
+  "description": "Application example with recommended architecture for Escobar micro framework",
   "main": "index.js",
   "dependencies": {
     "escobar": "^1.1.0"
