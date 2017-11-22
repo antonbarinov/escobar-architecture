@@ -1,0 +1,16 @@
+{
+  "name": "jobs",
+  "version": "1.0.0",
+  "description": "Node.js REST API simple, light and fast micro framework",
+  "main": "index.js",
+  "dependencies": {
+    "escobar": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "startApi": "node ./master.js",
+    "startExample": "node ./static_server.js"
+  },
+  "author": "Barinov Anton",
+  "license": "MIT"
+}
