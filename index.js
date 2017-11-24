@@ -60,6 +60,6 @@ server.onExecRoute = require('./server_callbacks/on_exec_route');
     // await for some stuff (example database migrations scripts, start some services, etc.)
 
     // This wrapped in "async" because almost always we do to so some stuff before we can start handle connections
-    server.loadRoutes(__dirname + '/routes'); // Load routes from folder
+    await server.loadRoutes(__dirname + '/routes'); // Load routes from folder
     server.startServer(); // Start server
 })();
