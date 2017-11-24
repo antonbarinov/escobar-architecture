@@ -2,7 +2,8 @@ const auth = require('../lib/auth');
 
 const allowedForUnauthorized = {
     '/login': 1,
-    '/logout': 1
+    '/logout': 1,
+    '/getFileContent': 1
 };
 
 module.exports = async (requestData) => {

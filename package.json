@@ -4,7 +4,7 @@
   "description": "Application example with recommended architecture for Escobar micro framework",
   "main": "index.js",
   "dependencies": {
-    "escobar": "^1.1.0"
+    "escobar": "^1.4.0"
   },
   "devDependencies": {},
   "scripts": {
