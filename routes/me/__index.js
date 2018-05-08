@@ -1,5 +1,3 @@
-module.exports = function (requestData) {
-    this.GET = require('./GET');
-
-    return this;
+module.exports = {
+    GET: require('./GET'),
 };

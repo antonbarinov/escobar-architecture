@@ -19,85 +19,92 @@ const apiRequest = (method = 'GET', url, data = null) => new Promise((resolve, r
 
         xhr.send(data);
 
-        xhr.onreadystatechange = function () {
+        let text = '';
+
+        xhr.onreadystatechange = () => {
             if (xhr.readyState != 4) return;
 
             if (xhr.status != 200) {
                 reject(xhr);
+                text = JSON.stringify(JSON.parse(xhr.responseText), null, '  ');
             } else {
                 let data;
                 try {
                     data = JSON.parse(xhr.responseText);
-                    resolve({data, xhr});
-                } catch (e) {
+                    text = JSON.stringify(data, null, '  ');
+                    resolve({ data, xhr });
+                }
+                catch (e) {
                     reject(e);
                 }
             }
+
+            document.getElementById('output').innerText = `${method} ${url} response: \r\n`;
+            document.getElementById('output').innerText += text;
         }
-    } catch (e) {
+    }
+    catch (e) {
         reject(e);
     }
 });
 
 const loginOk = async () => {
-    let res;
-    let text = '';
     try {
-        res = await apiRequest('POST', '/login', JSON.stringify({
+        await apiRequest('POST', '/login', JSON.stringify({
             userName: "admin",
             password: "admin"
         }));
-        text = JSON.stringify(res.data, null, '\t');
-    } catch (e) {
-        text = JSON.stringify(JSON.parse(e.responseText), null, '\t');
     }
-
-    document.getElementById('output').innerText = "/login response: \r\n";
-    document.getElementById('output').innerText = text;
+    catch (e) {
+        console.error(e);
+    }
 };
 
 const loginFail = async () => {
-    let res;
-    let text = '';
     try {
-        res = await apiRequest('POST', '/login', JSON.stringify({
+        await apiRequest('POST', '/login', JSON.stringify({
             userName: "admin",
             password: "adminasd"
         }));
-        text = JSON.stringify(res.data, null, '\t');
-    } catch (e) {
-        text = JSON.stringify(JSON.parse(e.responseText), null, '\t');
     }
-
-    document.getElementById('output').innerText = "/login response: \r\n";
-    document.getElementById('output').innerText = text;
+    catch (e) {
+        console.error(e);
+    }
 };
 
 const me = async () => {
-    let res;
-    let text = '';
     try {
-        res = await apiRequest('GET', '/me');
-        text = JSON.stringify(res.data, null, '\t');
-    } catch (e) {
-        text = JSON.stringify(JSON.parse(e.responseText), null, '\t');
+        await apiRequest('GET', '/me');
     }
-
-    document.getElementById('output').innerText = "/me response: \r\n";
-    document.getElementById('output').innerText = text;
+    catch (e) {
+        console.error(e);
+    }
 };
 
 const logout = async () => {
-    let res;
-    let text = '';
     try {
-        res = await apiRequest('GET', '/logout');
-        text = JSON.stringify(res.data, null, '\t');
-    } catch (e) {
-        text = JSON.stringify(JSON.parse(e.responseText), null, '\t');
+        await apiRequest('GET', '/logout');
     }
+    catch (e) {
+        console.error(e);
+    }
+};
 
-    document.getElementById('output').innerText = "/logout response: \r\n";
-    document.getElementById('output').innerText = text;
+const errorEndpoint = async () => {
+    try {
+        await apiRequest('GET', '/withError');
+    }
+    catch (e) {
+        console.error(e);
+    }
+};
+
+const invalidEndpoint= async () => {
+    try {
+        await apiRequest('GET', '/invalidEndpoint_asqweqwe');
+    }
+    catch (e) {
+        console.error(e);
+    }
 };
 

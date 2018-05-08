@@ -7,7 +7,7 @@ npm i
 npm run startExample
 ```
 
-Now go to [http://localhost:3001/](http://localhost:3001/)
+Now go to [http://localhost:3001/index.html](http://localhost:3001/index.html)
 
 # Run example api server only
 ```

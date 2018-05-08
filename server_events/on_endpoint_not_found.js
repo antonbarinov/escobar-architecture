@@ -4,7 +4,9 @@ const endpointNotFound = JSON.stringify({
 });
 
 module.exports = async (requestData) => {
-    // Don't exec server.onBeforeSendResponse
+    console.log('Application server event: not_found');
+
+    // Don't exec server event 'before_send_response'
     // Because i don't want to waste CPU time for JSON.stringify every time
     requestData._execOnBeforeSendResponse = false;
 

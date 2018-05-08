@@ -1,4 +1,6 @@
 module.exports = async (requestData) => {
+    console.log('Application server event: request');
+
     const res = requestData._response;
     const req = requestData._request;
 
