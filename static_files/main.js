@@ -5,7 +5,7 @@ function objectsToQueryString(obj) {
     }).join('&');
 }
 
-const apiRequest = (method = 'GET', url, data = null) => new Promise((resolve, reject) => {
+const apiRequest = (method = 'GET', url, data = null, contentType = 'application/json') => new Promise((resolve, reject) => {
     try {
         method = method.toUpperCase();
         const xhr = new XMLHttpRequest();
@@ -15,7 +15,7 @@ const apiRequest = (method = 'GET', url, data = null) => new Promise((resolve, r
             data = null;
         }
         xhr.open(method.toUpperCase(), url, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
+        if (contentType) xhr.setRequestHeader('Content-Type', contentType);
 
         xhr.send(data);
 
@@ -108,3 +108,18 @@ const invalidEndpoint= async () => {
     }
 };
 
+/**
+ * Send file
+ */
+const fileInput = document.createElement('input');
+fileInput.type = 'file';
+fileInput.multiple = true;
+fileInput.name = 'my_files';
+fileInput.addEventListener('change', async function () {
+    const data = new FormData();
+    for (const file of this.files) {
+        data.append(this.name, file);
+    }
+
+    await apiRequest('POST', '/uploadFiles', data, false);
+});

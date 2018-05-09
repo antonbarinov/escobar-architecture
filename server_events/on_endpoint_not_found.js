@@ -10,6 +10,7 @@ module.exports = async (requestData) => {
     // Because i don't want to waste CPU time for JSON.stringify every time
     requestData._execOnBeforeSendResponse = false;
 
+    requestData._http.setCode(404);
     requestData._clientResponse = endpointNotFound;
 
     return true;
