@@ -3,9 +3,14 @@ module.exports = async (requestData, err) => {
 
     requestData._http.setCode(500);
 
+    let errorMsg = __getErrorMsg(err);
+    if (process.env.NODE_ENV == 'production') errorMsg = 'Internal server error';
+
     requestData._clientResponse = {
         status: 'FAIL',
-        message: __getErrorMsg(err)
+        method: requestData._request.method,
+        route: requestData._route,
+        message: errorMsg
     };
 
     return true;
